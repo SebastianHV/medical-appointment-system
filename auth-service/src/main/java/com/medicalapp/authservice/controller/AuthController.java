@@ -2,7 +2,6 @@ package com.medicalapp.authservice.controller;
 
 import com.medicalapp.authservice.dto.RegisterRequestDTO;
 import com.medicalapp.authservice.dto.RegisterResponseDTO;
-import com.medicalapp.authservice.service.IUserService;
 import com.medicalapp.authservice.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     @Autowired
-    private IUserService userService;
+    private UserService userService;
 
 
     //  register POST endpoint

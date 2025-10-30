@@ -3,13 +3,14 @@ package com.medicalapp.authservice.service;
 import com.medicalapp.authservice.dto.RegisterRequestDTO;
 import com.medicalapp.authservice.dto.RegisterResponseDTO;
 import com.medicalapp.authservice.entity.User;
+import com.medicalapp.authservice.exception.EmailAlreadyExistsException;
 import com.medicalapp.authservice.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 //@Service
-public class UserService implements IUserService {
+public class UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -19,7 +20,7 @@ public class UserService implements IUserService {
     public RegisterResponseDTO registerUser(RegisterRequestDTO request) {
 //        Check if email already exists
         if (userRepository.findByEmail(request.getEmail()) != null) {
-            throw new IllegalArgumentException("Email already in use");
+            throw new EmailAlreadyExistsException("Email already exists: " + request.getEmail());
         }
 
         User user = new User();
